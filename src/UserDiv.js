@@ -1,6 +1,4 @@
 import React from 'react';
-import './UserDiv.css'; // Importar el archivo CSS aquí
-
 
 function UserDiv() {
   const [finalTranscript, setFinalTranscript] = React.useState('');
@@ -44,25 +42,25 @@ function UserDiv() {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-2">Transcriptor de Voz en Tiempo Real</h1>
-      <p className="mb-4">Presiona el botón para empezar a grabar. Puedes detener la grabación en cualquier momento y limpiar la transcripción.</p>
-      <div className="mb-4">
+    <div style={styles.container}>
+      <h1 style={styles.title}>Transcriptor sincrónico de habla</h1>
+      <p style={styles.description}>Presiona el botón para empezar a grabar. Puedes detener la grabación en cualquier momento y limpiar la transcripción.</p>
+      <div style={styles.buttonContainer}>
         <button
           onClick={toggleRecording}
-          className={`font-bold py-2 px-4 rounded ${isRecording ? 'bg-yellow-500 hover:bg-yellow-700' : 'bg-blue-500 hover:bg-blue-700'} text-white`}
+          style={isRecording ? styles.recordingButton : styles.startButton}
         >
           {isRecording ? 'Detener grabación' : 'Empezar a grabar'}
         </button>
         <button
           onClick={clearTranscript}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2"
+          style={styles.clearButton}
         >
           Limpiar
         </button>
       </div>
       <textarea
-        className="border p-4 w-full"
+        style={styles.textarea}
         rows="10"
         value={finalTranscript}
         onChange={(e) => setFinalTranscript(e.target.value)}
@@ -71,5 +69,66 @@ function UserDiv() {
     </div>
   );
 }
+
+// Estilos en línea
+const styles = {
+  container: {
+    padding: '20px',
+    margin: '0 auto', // Alinea el contenedor al centro horizontalmente
+    maxWidth: '600px', // Limita el ancho del contenedor
+  },
+  title: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    marginBottom: '16px',
+    fontFamily: 'Arial, sans-serif',
+  },
+  description: {
+    fontSize: '16px',
+    color: '#666',
+    marginBottom: '16px',
+    fontFamily: 'Verdana, sans-serif',
+  },
+  buttonContainer: {
+    marginBottom: '16px',
+  },
+  startButton: {
+    padding: '8px 16px',
+    fontSize: '16px',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    backgroundColor: '#4caf50',
+    color: '#fff',
+    transition: 'background-color 0.3s ease, transform 0.3s ease',
+  },
+  recordingButton: {
+    padding: '8px 16px',
+    fontSize: '16px',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    backgroundColor: '#ff6f61',
+    color: '#fff',
+    transition: 'background-color 0.3s ease, transform 0.3s ease',
+  },
+  clearButton: {
+    padding: '8px 16px',
+    fontSize: '16px',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    backgroundColor: '#ff6f61',
+    color: '#fff',
+    transition: 'background-color 0.3s ease, transform 0.3s ease',
+  },
+  textarea: {
+    width: '100%',
+    padding: '12px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    resize: 'vertical',
+  },
+};
 
 export default UserDiv;
