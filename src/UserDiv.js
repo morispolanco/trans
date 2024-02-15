@@ -17,11 +17,12 @@ function UserDiv() {
         for (let i = event.resultIndex; i < event.results.length; ++i) {
           const result = event.results[i];
           if (result.isFinal) {
-            setFinalTranscript((prevTranscript) => prevTranscript + result[0].transcript);
+            setFinalTranscript((prevTranscript) => prevTranscript + result[0].transcript + ' '); // Añadir un espacio después de cada transcripción final
           } else {
-            interimTranscript += result[0].transcript;
+            interimTranscript += result[0].transcript + ' '; // Añadir un espacio después de cada transcripción intermedia
           }
         }
+        setFinalTranscript((prevTranscript) => prevTranscript + interimTranscript); // Concatenar transcripciones intermedias con finales
       };
     } else {
       console.error('Speech recognition not supported in this browser.');
